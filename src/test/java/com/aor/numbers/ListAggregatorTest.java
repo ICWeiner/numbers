@@ -53,7 +53,7 @@ public class ListAggregatorTest {
 
         aggregator.helper(list);
 
-        int distinct = aggregator.distinct(list);
+        int distinct = aggregator.distinct(list,new ListDeduplicator());
 
         Assertions.assertEquals(4, distinct);
     }
@@ -69,5 +69,18 @@ public class ListAggregatorTest {
         int max = aggregator.max(list);
 
         Assertions.assertEquals(-1, max);
+    }
+
+    @Test
+    public void distinct_bug_8726(){
+        List<Integer> list = Arrays.asList(1,2,4,2);
+
+        ListAggregator aggregator = new ListAggregator();
+
+        aggregator.helper(list);
+
+        int distinct = aggregator.distinct(list,new MyDeduplicator());
+
+        Assertions.assertEquals(3, distinct);
     }
 }
