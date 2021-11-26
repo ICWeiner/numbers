@@ -79,7 +79,7 @@ public class ListAggregatorTest {
 
         aggregator.helper(list);
 
-        int distinct = aggregator.distinct(list,new MyDeduplicator());
+        int distinct = aggregator.distinct(list,new MyDeduplicatorStub());
 
         Assertions.assertEquals(3, distinct);
     }
